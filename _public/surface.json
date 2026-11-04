@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "slug": "mitmachen",
+      "component": "Mitmachen",
+      "title": "Mitmachen",
+      "link_param": {
+        "name": "veranstaltung",
+        "entity": "veranstaltungen",
+        "label_field": "titel",
+        "secondary_field": "datum"
+      },
+      "endpoints": [
+        {
+          "entity": "veranstaltungen",
+          "op": "list",
+          "fields": [
+            "titel",
+            "veranstaltungscode",
+            "datum",
+            "ort"
+          ],
+          "max_records": 500
+        },
+        {
+          "entity": "fragen_an_die_gruppe",
+          "op": "list",
+          "fields": [
+            "veranstaltung",
+            "typ",
+            "bezeichnung",
+            "fragestellung",
+            "status"
+          ],
+          "scope": "r.v_status == 'geoeffnet'",
+          "scope_description": "zeigt nur Fragen mit Status „geöffnet“",
+          "max_records": 100
+        },
+        {
+          "entity": "teilnehmende",
+          "op": "create",
+          "fields": [
+            "veranstaltung",
+            "kuerzel",
+            "email",
+            "einwilligung",
+            "einwilligung_zeitpunkt"
+          ]
+        },
+        {
+          "entity": "beitraege",
+          "op": "create",
+          "fields": [
+            "frage",
+            "teilnehmer",
+            "antwort",
+            "anmerkung",
+            "wichtigkeit",
+            "sendekennung",
+            "eingangszeit"
+          ],
+          "preset_fields": {
+            "freigabe": "neu"
+          }
+        }
+      ]
+    }
+  ]
+}

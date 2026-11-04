@@ -1,0 +1,54 @@
+{
+  "entities": {
+    "Veranstaltungen": {
+      "placeholders_set": 5,
+      "defaults_keys": [
+        "datum"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formeln, da es nur Stammdaten ohne numerische Felder oder Datumspaar gibt."
+    },
+    "Teilnehmende": {
+      "placeholders_set": 4,
+      "defaults_keys": [],
+      "computed_keys": [],
+      "reason": "Reine Stammdaten ohne numerische Felder, daher keine Formeln; Einwilligung und Zeitpunkt bewusst ohne Default, da sie vom Teilnehmenden aktiv gegeben werden."
+    },
+    "Fragen an die Gruppe": {
+      "placeholders_set": 7,
+      "defaults_keys": [
+        "status"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formeln, da die Felder nur Text, Auswahl und eine laufende Nummer enthalten und keine Berechnung sinnvoll ist."
+    },
+    "Beiträge": {
+      "placeholders_set": 6,
+      "defaults_keys": [
+        "eingangszeit",
+        "freigabe"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formel, da es keine Datumspaare oder Preis- und Mengenfelder gibt und die laufende Nummer der Frage nur eine Kennzahl ist."
+    },
+    "Auswertungen": {
+      "placeholders_set": 16,
+      "defaults_keys": [
+        "erstellt_am",
+        "beitraege_stand",
+        "bearbeitungsstatus"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formel, da kein sinnvoller numerischer Zusammenhang besteht (Fassung ist eine laufende Nummer, die Daten sind Texte)."
+    },
+    "Beamer-Steuerung": {
+      "placeholders_set": 4,
+      "defaults_keys": [
+        "anzeige",
+        "aktueller_abschnitt"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formeln, da es sich um Steuerungsdaten ohne Datumspaar oder Preis-Mengen-Kette handelt."
+    }
+  }
+}

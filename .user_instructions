@@ -1,0 +1,13 @@
+Wir moderieren Veranstaltungen mit etwa 30 Leuten und sammeln Gedanken statt am Flipchart über das Handy, um sie gemeinsam mit KI auszuwerten.
+Ich lege zu einer Veranstaltung Fragen an die Gruppe an, mit Typ, Fragestellung, einer Einleitung an die KI und einem Auftrag an die KI; jede Frage bekommt automatisch eine Bezeichnung aus Typ und laufender Nummer, zum Beispiel „Ideen 3“.
+Eine Frage ist vorbereitet, geöffnet oder geschlossen, und ich öffne und schließe sie mit einem Klick.
+Teilnehmende scannen den QR-Code der Veranstaltung, sehen ohne Anmeldung die gerade geöffnete Frage und schicken beliebig viele Beiträge: eine Antwort, dazu wahlweise eine Anmerkung und eine Wichtigkeit.
+Beim ersten Beitrag bekommt jedes Handy still ein fünfstelliges Kürzel ohne verwechselbare Zeichen, merkt es sich für den ganzen Abend und zeigt es nach jedem Absenden; ein Beitrag darf auch bei schlechtem Netz nie doppelt ankommen.
+Am Ende kann jeder freiwillig seine E-Mail-Adresse mit Einwilligung zu seinem Kürzel hinterlegen.
+Im Dashboard sehe ich neue Beiträge sofort, gebe sie mit einem Klick für den Beamer frei oder blende sie aus; je Frage kann ich stattdessen „Beiträge sofort zeigen“ einschalten.
+Aus einer Frage erstelle ich eine Auswertung: Einleitung und Auftrag kommen aus der Frage, alle nicht ausgeblendeten Beiträge werden nummeriert dazugeschrieben, und es wird festgehalten, welche Beiträge es waren und von wann.
+Ich kann den Text ändern und ihn dann an die KI geben; die Antwort kommt in vier bis sechs Abschnitten zurück, ich kann sie bearbeiten, Notizen dazuschreiben oder ohne KI den Text kopieren und ein Ergebnis einfügen.
+Jede neue Auswertung ist eine eigene Fassung, alte bleiben erhalten, und aus einem Vorschlag im Ergebnis lege ich direkt eine neue Frage an, die auf die Auswertung verweist.
+Für den Beamer gibt es eine Vollbild-Ansicht, die ohne Neuladen zeigt, was ich mit „Auf Beamer zeigen“ ausgewählt habe: die Frage mit QR-Code und freigegebenen Beiträgen, die Zusammenstellung oder das KI-Ergebnis Abschnitt für Abschnitt.
+Der Beamer zeigt immer die Veranstaltung, deren Frage gerade geöffnet ist.
+Auf dem Beamer erscheinen nie Kürzel, E-Mail-Adressen, Notizen oder etwas, das ich nicht freigegeben habe.

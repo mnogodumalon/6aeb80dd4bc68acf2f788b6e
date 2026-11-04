@@ -1,0 +1,42 @@
+{
+  "pages": {
+    "en": {
+      "Alle freigeben": "Approve all",
+      "Alles geprüft — neue Beiträge zu „{0}“ erscheinen hier sofort.": "All reviewed — new posts for \"{0}\" will appear here immediately.",
+      "Auf Beamer zeigen": "Show on projector",
+      "Ausblenden": "Hide",
+      "Bei „{0}“ ist gerade keine Frage geöffnet — heute ist {1}, öffne die nächste.": "No question is currently open in \"{0}\" — today is {1}, open the next one.",
+      "Beitrag ausgeblendet": "Post hidden",
+      "Beiträge sofort zeigen": "Show posts immediately",
+      "Beiträge werden erst nach Freigabe gezeigt": "Posts are shown only after approval",
+      "Beiträge werden sofort gezeigt": "Posts are shown immediately",
+      "Der Beamer zeigt die Frage, sobald eine geöffnet ist.": "The projector shows the question as soon as one is open.",
+      "Erste Veranstaltung anlegen": "Create first event",
+      "Es ist schon „{0}“ geöffnet — bitte erst schließen.": "\"{0}\" is already open — please close it first.",
+      "Frage": "Question",
+      "Frage läuft jetzt auf dem Beamer": "Question is now live on the projector",
+      "Frage schließen": "Close question",
+      "Frage öffnen": "Open question",
+      "Freigeben": "Approve",
+      "Für den Beamer freigegeben": "Approved for projector",
+      "Geprüft": "Reviewed",
+      "Lege deine erste Veranstaltung an, dann kann die Gruppe loslegen.": "Create your first event, then the group can get started.",
+      "Mitmachen & Beamer": "Participate & projector",
+      "Neue Beiträge": "New posts",
+      "Neue Frage": "New question",
+      "Neue Veranstaltung": "New event",
+      "Noch keine Veranstaltung — lege eine an und stelle der Gruppe die erste Frage.": "No event yet — create one and ask the group the first question.",
+      "Noch nichts zu prüfen — öffne eine Frage, dann kommen Beiträge herein.": "Nothing to review yet — open a question, then posts will come in.",
+      "Offen ist „{0}“ bei „{1}“ — alle Beiträge sind geprüft.": "Open is \"{0}\" in \"{1}\" — all posts have been reviewed.",
+      "Offen ist „{0}“ — {1} warten auf deine Freigabe.": "Open is \"{0}\" — {1} waiting for your approval.",
+      "Offene Frage": "Open question",
+      "QR-Code zum Mitmachen": "QR code to participate",
+      "Veranstaltung": "Event",
+      "keine": "none",
+      "und weitere haben Beiträge geschickt — sie warten auf die Freigabe für den Beamer.": "and others have submitted posts — they are waiting for approval for the projector.",
+      "{0} freigegeben": "{0} approved",
+      "{0} · {1} neu": "{0} · {1} new"
+    }
+  },
+  "v": 1
+}

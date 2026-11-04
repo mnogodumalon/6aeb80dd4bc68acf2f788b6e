@@ -1,0 +1,56 @@
+{
+  "VeranstaltungenDialog.tsx": {
+    "titel": "z. B. Sommerfest 2026",
+    "datum": "Wann findet es statt?",
+    "ort": "z. B. Stadthalle Berlin",
+    "beschreibung": "Worum geht es bei der Veranstaltung?",
+    "veranstaltungscode": "z. B. sommerfest-2026"
+  },
+  "TeilnehmendeDialog.tsx": {
+    "veranstaltung": "Welche Veranstaltung?",
+    "kuerzel": "z. B. MK-07",
+    "email": "z. B. name@beispiel.de",
+    "einwilligung_zeitpunkt": "Wann wurde eingewilligt?"
+  },
+  "FragenAnDieGruppeDialog.tsx": {
+    "quell_auswertung": "Aus welcher Auswertung?",
+    "veranstaltung": "Welche Veranstaltung?",
+    "laufende_nummer": "z. B. 1",
+    "bezeichnung": "z. B. Ideen 1",
+    "fragestellung": "Was möchten Sie die Gruppe fragen?",
+    "einleitung_ki": "Kontext für die KI",
+    "auftrag_ki": "Was soll die KI tun?"
+  },
+  "BeitraegeDialog.tsx": {
+    "teilnehmer": "Wer hat geantwortet?",
+    "antwort": "Was lautet die Antwort?",
+    "anmerkung": "Weitere Hinweise zum Beitrag",
+    "sendekennung": "z. B. msg-2026-0001",
+    "eingangszeit": "Wann kam der Beitrag?",
+    "frage": "Welche Frage?"
+  },
+  "AuswertungenDialog.tsx": {
+    "frage": "Welche Frage?",
+    "beitraege": "Welche Beiträge?",
+    "bezeichnung": "z. B. Erste Zusammenfassung",
+    "fassung": "z. B. 1",
+    "erstellt_am": "Wann wurde sie erstellt?",
+    "beitraege_stand": "Bis wann zählen Beiträge?",
+    "zusammenstellung": "Alle Beiträge als Text",
+    "ki_antwort": "Antwort der KI einfügen",
+    "abschnitt_1": "Inhalt des ersten Abschnitts",
+    "abschnitt_2": "Inhalt des zweiten Abschnitts",
+    "abschnitt_3": "Inhalt des dritten Abschnitts",
+    "abschnitt_4": "Inhalt des vierten Abschnitts",
+    "abschnitt_5": "Optionaler fünfter Abschnitt",
+    "abschnitt_6": "Optionaler sechster Abschnitt",
+    "notizen": "Interne Hinweise",
+    "vorschlaege": "Eine Frage pro Zeile"
+  },
+  "BeamerSteuerungDialog.tsx": {
+    "veranstaltung": "Welche Veranstaltung?",
+    "aktueller_abschnitt": "z. B. 1",
+    "frage": "Welche Frage?",
+    "auswertung": "Welche Auswertung?"
+  }
+}

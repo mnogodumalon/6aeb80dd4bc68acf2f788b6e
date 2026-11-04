@@ -1,0 +1,1103 @@
+# Scaffold key file contents — part 1/2.
+Same rule as .scaffold_context: these files are pre-generated; never Read the source files themselves.
+
+## src/types/app.ts
+```
+import { lookupLabel } from '@/i18n';
+
+// AUTOMATICALLY GENERATED TYPES - DO NOT EDIT
+
+export type LookupValue = { key: string; label: string };
+/** A raw record URL (applookup reference). NEVER render this directly
+ *  in JSX — it is a URL, not a display value. Show the enriched `*Name`
+ *  field or resolve it via the entity map instead. Assignable to/from
+ *  string everywhere; the `& {}` keeps the alias NAME visible in tsc
+ *  error messages (a plain primitive alias gets normalized away). */
+export type RecordUrl = string & {};
+export type GeoLocation = { lat: number; long: number; info?: string };
+
+export type AttachmentType = 'file' | 'note' | 'url' | 'json';
+export interface Attachment {
+  id: string;
+  type: AttachmentType;
+  label: string | null;
+  value: string | null;
+  active: boolean;
+  createdat?: string | null;
+  updatedat?: string | null;
+}
+
+export interface AttachmentInput {
+  type: AttachmentType;
+  label?: string;
+  value: string;
+  active?: boolean;
+}
+
+export interface Veranstaltungen {
+  record_id: string;
+  /** The API field. */
+  created_at: string;
+  updated_at: string | null;
+  /** Alias of created_at, filled by the read helpers. The API sends
+   *  snake_case only — reading `createdat` off a raw record yields
+   *  undefined, which type-checks and then crashes at runtime. */
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    titel?: string;
+    datum?: string; // Format: YYYY-MM-DD oder ISO String
+    ort?: string;
+    beschreibung?: string;
+    veranstaltungscode?: string;
+  };
+}
+
+export interface Teilnehmende {
+  record_id: string;
+  /** The API field. */
+  created_at: string;
+  updated_at: string | null;
+  /** Alias of created_at, filled by the read helpers. The API sends
+   *  snake_case only — reading `createdat` off a raw record yields
+   *  undefined, which type-checks and then crashes at runtime. */
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    veranstaltung?: RecordUrl; // applookup -> URL zu 'Veranstaltungen' Record
+    kuerzel?: string;
+    email?: string;
+    einwilligung?: boolean;
+    einwilligung_zeitpunkt?: string; // Format: YYYY-MM-DD oder ISO String
+  };
+}
+
+export interface FragenAnDieGruppe {
+  record_id: string;
+  /** The API field. */
+  created_at: string;
+  updated_at: string | null;
+  /** Alias of created_at, filled by the read helpers. The API sends
+   *  snake_case only — reading `createdat` off a raw record yields
+   *  undefined, which type-checks and then crashes at runtime. */
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    quell_auswertung?: RecordUrl; // applookup -> URL zu 'Auswertungen' Record
+    veranstaltung?: RecordUrl; // applookup -> URL zu 'Veranstaltungen' Record
+    typ?: LookupValue;
+    laufende_nummer?: number;
+    bezeichnung?: string;
+    fragestellung?: string;
+    einleitung_ki?: string;
+    auftrag_ki?: string;
+    status?: LookupValue;
+    beitraege_sofort_zeigen?: boolean;
+  };
+}
+
+export interface Beitraege {
+  record_id: string;
+  /** The API field. */
+  created_at: string;
+  updated_at: string | null;
+  /** Alias of created_at, filled by the read helpers. The API sends
+   *  snake_case only — reading `createdat` off a raw record yields
+   *  undefined, which type-checks and then crashes at runtime. */
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    teilnehmer?: RecordUrl; // applookup -> URL zu 'Teilnehmende' Record
+    antwort?: string;
+    anmerkung?: string;
+    wichtigkeit?: LookupValue;
+    sendekennung?: string;
+    freigabe?: LookupValue;
+    eingangszeit?: string; // Format: YYYY-MM-DD oder ISO String
+    frage?: RecordUrl; // applookup -> URL zu 'FragenAnDieGruppe' Record
+  };
+}
+
+export interface Auswertungen {
+  record_id: string;
+  /** The API field. */
+  created_at: string;
+  updated_at: string | null;
+  /** Alias of created_at, filled by the read helpers. The API sends
+   *  snake_case only — reading `createdat` off a raw record yields
+   *  undefined, which type-checks and then crashes at runtime. */
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    frage?: RecordUrl; // applookup -> URL zu 'FragenAnDieGruppe' Record
+    beitraege?: RecordUrl[];
+    bezeichnung?: string;
+    fassung?: number;
+    erstellt_am?: string; // Format: YYYY-MM-DD oder ISO String
+    beitraege_stand?: string; // Format: YYYY-MM-DD oder ISO String
+    zusammenstellung?: string;
+    ki_antwort?: string;
+    abschnitt_1?: string;
+    abschnitt_2?: string;
+    abschnitt_3?: string;
+    abschnitt_4?: string;
+    abschnitt_5?: string;
+    abschnitt_6?: string;
+    notizen?: string;
+    vorschlaege?: string;
+    bearbeitungsstatus?: LookupValue;
+  };
+}
+
+export interface BeamerSteuerung {
+  record_id: string;
+  /** The API field. */
+  created_at: string;
+  updated_at: string | null;
+  /** Alias of created_at, filled by the read helpers. The API sends
+   *  snake_case only — reading `createdat` off a raw record yields
+   *  undefined, which type-checks and then crashes at runtime. */
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    veranstaltung?: RecordUrl; // applookup -> URL zu 'Veranstaltungen' Record
+    anzeige?: LookupValue;
+    aktueller_abschnitt?: number;
+    frage?: RecordUrl; // applookup -> URL zu 'FragenAnDieGruppe' Record
+    auswertung?: RecordUrl; // applookup -> URL zu 'Auswertungen' Record
+  };
+}
+
+export const APP_IDS = {
+  VERANSTALTUNGEN: '6aeb80c0ad9d7b9f92749632',
+  TEILNEHMENDE: '6aeb80c6c9f96470f25f8378',
+  FRAGEN_AN_DIE_GRUPPE: '6aeb80c6b89d4b9f4cbbbe65',
+  BEITRAEGE: '6aeb80c70a353f3beec62897',
+  AUSWERTUNGEN: '6aeb80c88b3ef0846f80b08b',
+  BEAMER_STEUERUNG: '6aeb80c92505db2c7e7d5c33',
+} as const;
+
+
+export const LOOKUP_OPTIONS: Record<string, Record<string, {key: string, label: string}[]>> = {
+  'fragen_an_die_gruppe': {
+    typ: [{ key: "ideen", get label() { return lookupLabel('fragen_an_die_gruppe', 'typ', "ideen") ?? "Ideen"; } }, { key: "fragen", get label() { return lookupLabel('fragen_an_die_gruppe', 'typ', "fragen") ?? "Fragen"; } }, { key: "stimmung", get label() { return lookupLabel('fragen_an_die_gruppe', 'typ', "stimmung") ?? "Stimmung"; } }, { key: "probleme", get label() { return lookupLabel('fragen_an_die_gruppe', 'typ', "probleme") ?? "Probleme"; } }, { key: "massnahmen", get label() { return lookupLabel('fragen_an_die_gruppe', 'typ', "massnahmen") ?? "Maßnahmen"; } }],
+    status: [{ key: "vorbereitet", get label() { return lookupLabel('fragen_an_die_gruppe', 'status', "vorbereitet") ?? "Vorbereitet"; } }, { key: "geoeffnet", get label() { return lookupLabel('fragen_an_die_gruppe', 'status', "geoeffnet") ?? "Geöffnet"; } }, { key: "geschlossen", get label() { return lookupLabel('fragen_an_die_gruppe', 'status', "geschlossen") ?? "Geschlossen"; } }],
+  },
+  'beitraege': {
+    wichtigkeit: [{ key: "niedrig", get label() { return lookupLabel('beitraege', 'wichtigkeit', "niedrig") ?? "Niedrig"; } }, { key: "mittel", get label() { return lookupLabel('beitraege', 'wichtigkeit', "mittel") ?? "Mittel"; } }, { key: "hoch", get label() { return lookupLabel('beitraege', 'wichtigkeit', "hoch") ?? "Hoch"; } }],
+    freigabe: [{ key: "neu", get label() { return lookupLabel('beitraege', 'freigabe', "neu") ?? "Neu"; } }, { key: "freigegeben", get label() { return lookupLabel('beitraege', 'freigabe', "freigegeben") ?? "Für Beamer freigegeben"; } }, { key: "ausgeblendet", get label() { return lookupLabel('beitraege', 'freigabe', "ausgeblendet") ?? "Ausgeblendet"; } }],
+  },
+  'auswertungen': {
+    bearbeitungsstatus: [{ key: "zusammengestellt", get label() { return lookupLabel('auswertungen', 'bearbeitungsstatus', "zusammengestellt") ?? "Zusammengestellt"; } }, { key: "an_ki_gegeben", get label() { return lookupLabel('auswertungen', 'bearbeitungsstatus', "an_ki_gegeben") ?? "An KI gegeben"; } }, { key: "ergebnis_vorhanden", get label() { return lookupLabel('auswertungen', 'bearbeitungsstatus', "ergebnis_vorhanden") ?? "Ergebnis vorhanden"; } }],
+  },
+  'beamer_steuerung': {
+    anzeige: [{ key: "frage_beitraege", get label() { return lookupLabel('beamer_steuerung', 'anzeige', "frage_beitraege") ?? "Frage mit QR-Code und freigegebenen Beiträgen"; } }, { key: "zusammenstellung", get label() { return lookupLabel('beamer_steuerung', 'anzeige', "zusammenstellung") ?? "Zusammenstellung"; } }, { key: "ki_ergebnis", get label() { return lookupLabel('beamer_steuerung', 'anzeige', "ki_ergebnis") ?? "KI-Ergebnis Abschnitt für Abschnitt"; } }],
+  },
+};
+
+// Optimistic LookupValue writes: never re-type a label — resolve the schema
+// option instead (its label is a locale-aware getter; falls back to the key).
+// WRONG: status: { key: 'offen', label: 'Offen' }   (frozen in one language)
+// RIGHT: status: lookupOption('<appKey>', 'status', 'offen')
+export function lookupOption(app: string, field: string, key: string): LookupValue {
+  return LOOKUP_OPTIONS[app]?.[field]?.find(o => o.key === key) ?? { key, label: key };
+}
+
+export const FIELD_TYPES: Record<string, Record<string, string>> = {
+  'veranstaltungen': {
+    'titel': 'string/text',
+    'datum': 'date/datetimeminute',
+    'ort': 'string/text',
+    'beschreibung': 'string/textarea',
+    'veranstaltungscode': 'string/text',
+  },
+  'teilnehmende': {
+    'veranstaltung': 'applookup/select',
+    'kuerzel': 'string/text',
+    'email': 'string/email',
+    'einwilligung': 'bool',
+    'einwilligung_zeitpunkt': 'date/datetimeminute',
+  },
+  'fragen_an_die_gruppe': {
+    'quell_auswertung': 'applookup/select',
+    'veranstaltung': 'applookup/select',
+    'typ': 'lookup/select',
+    'laufende_nummer': 'number',
+    'bezeichnung': 'string/text',
+    'fragestellung': 'string/textarea',
+    'einleitung_ki': 'string/textarea',
+    'auftrag_ki': 'string/textarea',
+    'status': 'lookup/radio',
+    'beitraege_sofort_zeigen': 'bool',
+  },
+  'beitraege': {
+    'teilnehmer': 'applookup/select',
+    'antwort': 'string/textarea',
+    'anmerkung': 'string/textarea',
+    'wichtigkeit': 'lookup/radio',
+    'sendekennung': 'string/text',
+    'freigabe': 'lookup/radio',
+    'eingangszeit': 'date/datetimeminute',
+    'frage': 'applookup/select',
+  },
+  'auswertungen': {
+    'frage': 'applookup/select',
+    'beitraege': 'multipleapplookup/select',
+    'bezeichnung': 'string/text',
+    'fassung': 'number',
+    'erstellt_am': 'date/datetimeminute',
+    'beitraege_stand': 'date/datetimeminute',
+    'zusammenstellung': 'string/textarea',
+    'ki_antwort': 'string/textarea',
+    'abschnitt_1': 'string/textarea',
+    'abschnitt_2': 'string/textarea',
+    'abschnitt_3': 'string/textarea',
+    'abschnitt_4': 'string/textarea',
+    'abschnitt_5': 'string/textarea',
+    'abschnitt_6': 'string/textarea',
+    'notizen': 'string/textarea',
+    'vorschlaege': 'string/textarea',
+    'bearbeitungsstatus': 'lookup/select',
+  },
+  'beamer_steuerung': {
+    'veranstaltung': 'applookup/select',
+    'anzeige': 'lookup/radio',
+    'aktueller_abschnitt': 'number',
+    'frage': 'applookup/select',
+    'auswertung': 'applookup/select',
+  },
+};
+
+export const HUB_TOPOLOGY: Record<string, { field: string; entity: string }[]> = {
+  'veranstaltungen': [
+    { field: 'veranstaltung', entity: 'teilnehmende' },
+    { field: 'veranstaltung', entity: 'fragen_an_die_gruppe' },
+    { field: 'veranstaltung', entity: 'beamer_steuerung' },
+  ],
+  'fragen_an_die_gruppe': [
+    { field: 'frage', entity: 'beitraege' },
+    { field: 'frage', entity: 'auswertungen' },
+    { field: 'frage', entity: 'beamer_steuerung' },
+  ],
+};
+
+type StripLookup<T> = {
+  [K in keyof T]: T[K] extends LookupValue | undefined ? string | LookupValue | undefined
+    : T[K] extends LookupValue[] | undefined ? string[] | LookupValue[] | undefined
+    : T[K];
+};
+
+// Helper Types for creating new records (lookup fields as plain strings for API)
+export type CreateVeranstaltungen = StripLookup<Veranstaltungen['fields']>;
+export type CreateTeilnehmende = StripLookup<Teilnehmende['fields']>;
+export type CreateFragenAnDieGruppe = StripLookup<FragenAnDieGruppe['fields']>;
+export type CreateBeitraege = StripLookup<Beitraege['fields']>;
+export type CreateAuswertungen = StripLookup<Auswertungen['fields']>;
+export type CreateBeamerSteuerung = StripLookup<BeamerSteuerung['fields']>;
+```
+
+## src/services/livingAppsService.ts
+```
+// AUTOMATICALLY GENERATED SERVICE
+import { APP_IDS, LOOKUP_OPTIONS, FIELD_TYPES } from '@/types/app';
+import { ensureUploadableImage } from '@/lib/ai';
+import { REST_URL, restFetch } from '@/lib/origin';
+import { reportFailedWrite } from '@/lib/sentry';
+import type { Veranstaltungen, Teilnehmende, FragenAnDieGruppe, Beitraege, Auswertungen, BeamerSteuerung, CreateVeranstaltungen, CreateTeilnehmende, CreateFragenAnDieGruppe, CreateBeitraege, CreateAuswertungen, CreateBeamerSteuerung } from '@/types/app';
+
+// Base Configuration — the host is a RUNTIME fact (lib/origin.ts):
+// a bundle copied to another LA instance must talk to THAT instance.
+const API_BASE_URL = REST_URL;
+
+// --- HELPER FUNCTIONS ---
+export function extractRecordId(url: unknown): string | null {
+  if (!url) return null;
+  if (typeof url !== 'string') return null;
+  const match = url.match(/([a-f0-9]{24})$/i);
+  return match ? match[1] : null;
+}
+
+// multipleapplookup form-state is Array<URL>. The MultiCombobox picker
+// works on record-ids; this helper maps a raw form value (which may be
+// undefined, null, a single URL string from a legacy single-Combobox
+// render, or the expected URL array) to a clean string[] of ids.
+export function extractRecordIds(urls: unknown): string[] {
+  if (!urls) return [];
+  const arr = Array.isArray(urls) ? urls : [urls];
+  const out: string[] = [];
+  for (const u of arr) {
+    const id = extractRecordId(u);
+    if (id) out.push(id);
+  }
+  return out;
+}
+
+export function createRecordUrl(appId: string, recordId: string): string {
+  return `${API_BASE_URL}/apps/${appId}/records/${recordId}`;
+}
+
+export class LivingAppsApiError extends Error {
+  status: number;
+  type?: string;
+  /** Stable error type identifier — the last path segment of `type`
+   *  (v1: `…/rest/v1/docs/errors/<id>`, e.g. `no_app_permission`). */
+  code?: string;
+  control_identifier?: string;
+  control_type?: string;
+  field_type?: string;
+  detail?: string;
+  constructor(message: string, status: number, raw?: Record<string, unknown>) {
+    super(message);
+    this.name = 'LivingAppsApiError';
+    this.status = status;
+    if (raw) {
+      this.type = typeof raw.type === 'string' ? raw.type : undefined;
+      this.code = this.type ? this.type.replace(/\/+$/, '').split('/').pop() : undefined;
+      this.control_identifier = typeof raw.control_identifier === 'string' ? raw.control_identifier : undefined;
+      this.control_type = typeof raw.control_type === 'string' ? raw.control_type : undefined;
+      this.field_type = typeof raw.field_type === 'string' ? raw.field_type : undefined;
+      this.detail = typeof raw.detail === 'string' ? raw.detail : undefined;
+    }
+  }
+}
+
+async function parseErrorBody(response: Response): Promise<{ message: string; raw?: Record<string, unknown> }> {
+  const text = await response.text();
+  if (!text) return { message: `HTTP ${response.status}` };
+  try {
+    const raw = JSON.parse(text);
+    if (raw && typeof raw === 'object') {
+      const obj = raw as Record<string, unknown>;
+      const message = typeof obj.detail === 'string' ? obj.detail
+        : typeof obj.title === 'string' ? obj.title
+        : text;
+      return { message, raw: obj };
+    }
+  } catch { /* fall through to text */ }
+  return { message: text };
+}
+
+export interface CallApiOptions {
+  /** Skip errorbus dispatch for expected failures (e.g. optional-param 404s). */
+  silent?: boolean;
+  /** Abort the request (a keystroke replacing the previous search). */
+  signal?: AbortSignal;
+}
+
+/** Query options of GET /apps/{id}/records — filter/orderby are vSQL (see the journey layer's
+ *  buildSearchFilter; never concatenate user input into them yourself). */
+export interface RecordQuery {
+  filter?: string;
+  orderby?: string[];
+  limit?: number;
+  offset?: number;
+  /** Field projection (`field=` repeated). The record's `fields` then holds ONLY these keys. */
+  fields?: string[];
+  signal?: AbortSignal;
+  /** A read a display surface repeats (polling, a live board): a network failure
+ *  is no toast — the surface keeps its last state and says it is stale (S-9). */
+  silent?: boolean;
+}
+// URLSearchParams encodes spaces as `+` — the API accepts it (verified live
+// 2026-09-02: orderby=r.v_nachname+asc → 200, sorted; filter with + → 200).
+export function recordQueryString(q: RecordQuery): string {
+  const p = new URLSearchParams();
+  if (q.filter) p.set('filter', q.filter);
+  for (const o of q.orderby ?? []) p.append('orderby', o);
+  for (const f of q.fields ?? []) p.append('field', f);
+  if (q.limit !== undefined) p.set('limit', String(Math.max(1, Math.floor(q.limit))));
+  if (q.offset !== undefined) p.set('offset', String(Math.max(0, Math.floor(q.offset))));
+  const s = p.toString();
+  return s ? `?${s}` : '';
+}
+/** `[[n]]` from aggregate_records?value=count() -> n; `[]` -> 0; anything else -> 0 (never NaN). */
+export function parseAggregateCount(data: unknown): number {
+  if (!Array.isArray(data)) return 0;
+  if (data.length === 0) return 0;
+  const first = data[0];
+  const n = Array.isArray(first) ? Number(first[0]) : Number(first);
+  return Number.isFinite(n) ? n : 0;
+}
+
+/** What the create and update helpers resolve to. Same `record_id`
+ *  the read helpers expose, so the whole family behaves alike — the
+ *  raw REST answer only
+ *  carries `id`, and code that guessed (e.g. Object.keys(res)[0]) built
+ *  `/records/id` and got a 400 on the next write. */
+export interface MutationResult {
+  record_id: string;
+  id: string;
+  fields: Record<string, any>;
+  [key: string]: any;
+}
+
+/** The entity (APP_IDS key, lower case) a REST endpoint writes to — for the
+ *  failed-write report, which names the entity, never the record. */
+function entityOfEndpoint(endpoint: string): string | undefined {
+  const m = /\/apps\/([a-f0-9]{24})/.exec(endpoint);
+  if (!m) return undefined;
+  return (Object.keys(APP_IDS) as (keyof typeof APP_IDS)[]).find(k => APP_IDS[k] === m[1])?.toLowerCase();
+}
+
+async function callApi(method: string, endpoint: string, data?: any, options?: CallApiOptions) {
+  const silent = options?.silent === true;
+  let response: Response;
+  try {
+    response = await restFetch(`${API_BASE_URL}${endpoint}`, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',  // Nutze Session Cookies für Auth
+      signal: options?.signal,
+      body: data ? JSON.stringify(data) : undefined
+    });
+  } catch (netErr) {
+    // A search the user typed past is cancelled, not broken — it must not
+    // raise an error toast on its way out.
+    if (netErr instanceof Error && netErr.name === 'AbortError') throw netErr;
+    const message = netErr instanceof Error ? netErr.message : String(netErr);
+    if (!silent) {
+      window.dispatchEvent(new CustomEvent('errorbus:emit', { detail: {
+        source: 'network', message, status: 0,
+      } }));
+    }
+    if (method !== 'GET') reportFailedWrite({ method, status: 0, entity: entityOfEndpoint(endpoint) });
+    throw netErr;
+  }
+  if (!response.ok) {
+    // 401 = not signed in → the login screen, never the errorbus (repair can't fix auth).
+    // 403 = signed in, but this list is not theirs to read or write: a notice,
+    // the page stays (05.10.2026 — it used to say „not logged in“ and blank everything).
+    const isAuthError = response.status === 401;
+    if (isAuthError) window.dispatchEvent(new Event('auth-error'));
+    const { message, raw } = await parseErrorBody(response);
+    const err = new LivingAppsApiError(message, response.status, raw);
+    if (!silent && !isAuthError) {
+      window.dispatchEvent(new CustomEvent('errorbus:emit', { detail: {
+        source: 'api',
+        status: err.status,
+        type: err.type,
+        control_identifier: err.control_identifier,
+        control_type: err.control_type,
+        field_type: err.field_type,
+        detail: err.detail,
+        message: err.message,
+      } }));
+    }
+    // A refused write goes to Sentry as well as to the toast: the user sees it,
+    // now we do too (27.10.2026 — not one failed save had ever reached Sentry).
+    if (method !== 'GET') {
+      reportFailedWrite({ method, status: err.status, code: err.code, field: err.control_identifier, entity: entityOfEndpoint(endpoint) });
+    }
+    throw err;
+  }
+  // DELETE returns often empty body or simple status
+  if (method === 'DELETE') return true;
+  return response.json();
+}
+
+/** Upload a file to LivingApps. Returns the file URL for use in record fields. */
+export async function uploadFile(file: File | Blob, filename?: string): Promise<string> {
+  // HEIC/HEIF (iPhone photos) crash the server-side image decoder (500).
+  // Convert to JPEG in the browser BEFORE upload — every upload path routes
+  // through here, so this one guard covers form fields AND attachments.
+  if (file instanceof File) file = await ensureUploadableImage(file);
+  const formData = new FormData();
+  formData.append('file', file, filename ?? (file instanceof File ? file.name : 'upload'));
+  const res = await restFetch(`${API_BASE_URL}/files`, {
+    method: 'POST',
+    credentials: 'include',
+    body: formData,
+  });
+  if (!res.ok) {
+    if (res.status === 401) window.dispatchEvent(new Event('auth-error'));
+    else if (res.status === 403) window.dispatchEvent(new CustomEvent('errorbus:emit', { detail: {
+      source: 'api', status: 403, message: 'File upload failed: 403',
+    } }));
+    throw new Error(`File upload failed: ${res.status}`);
+  }
+  const data = await res.json();
+  return data.url;
+}
+
+// --- ATTACHMENT API ---
+// Record-attachments: file/note/url/json blobs attached to a single record.
+// `getAttachments` returns a dict keyed by attachment id; we flatten to an array.
+export async function getRecordAttachments(appId: string, recordId: string) {
+  const data = await callApi('GET', `/apps/${appId}/records/${recordId}/attachments`, undefined, { silent: true }).catch(() => ({}));
+  if (!data || typeof data !== 'object') return [] as import('@/types/app').Attachment[];
+  return Object.entries(data).map(([id, att]) => ({ id, ...(att as Record<string, unknown>) })) as import('@/types/app').Attachment[];
+}
+
+export async function createRecordAttachment(appId: string, recordId: string, input: import('@/types/app').AttachmentInput) {
+  return callApi('POST', `/apps/${appId}/records/${recordId}/attachments`, input) as Promise<import('@/types/app').Attachment>;
+}
+
+export async function updateRecordAttachment(appId: string, recordId: string, attachmentId: string, input: Partial<import('@/types/app').AttachmentInput>) {
+  return callApi('PATCH', `/apps/${appId}/records/${recordId}/attachments/${attachmentId}`, input) as Promise<import('@/types/app').Attachment>;
+}
+
+export async function deleteRecordAttachment(appId: string, recordId: string, attachmentId: string) {
+  return callApi('DELETE', `/apps/${appId}/records/${recordId}/attachments/${attachmentId}`);
+}
+
+function enrichLookupFields<T extends { fields: Record<string, unknown> }>(
+  records: T[], entityKey: string
+): T[] {
+  const opts = LOOKUP_OPTIONS[entityKey];
+  if (!opts) return records;
+  return records.map(r => {
+    const fields = { ...r.fields };
+    for (const [fieldKey, options] of Object.entries(opts)) {
+      const val = fields[fieldKey];
+      if (typeof val === 'string') {
+        const m = options.find(o => o.key === val);
+        fields[fieldKey] = m ?? { key: val, label: val };
+      } else if (Array.isArray(val)) {
+        fields[fieldKey] = val.map(v => {
+          if (typeof v === 'string') {
+            const m = options.find(o => o.key === v);
+            return m ?? { key: v, label: v };
+          }
+          return v;
+        });
+      }
+    }
+    return { ...r, fields } as T;
+  });
+}
+
+/** A textarea that HOLDS A LIST but was typed on one line.
+ *
+ *  Rendering such a field as tiles/bullets is the natural thing to do, and
+ *  the natural way to write it is `value.split('\n')` — one item per line
+ *  is the convention every form implies. Owners type differently though:
+ *  a live landing page collapsed five services into ONE tile because the
+ *  record held 'Tagesbetreuung, Übernachtung, …' without a single line
+ *  break. Normalizing HERE makes that natural split correct whatever was
+ *  typed, instead of asking every page to re-derive the heuristic.
+ *
+ *  Deliberately conservative — prose must survive untouched:
+ *    · already has line breaks  → left alone (the author's own structure)
+ *    · ; • · |                  → unambiguous separators, 2 parts suffice
+ *    · commas                   → only with 3+ parts that all read like
+ *                                 labels: short, at most four words, no
+ *                                 sentence punctuation. A prose clause like
+ *                                 "Katzen und Kleintiere aller Rassen" is
+ *                                 short enough but not wordy-short.
+ *  Anything else stays as it is, so a wrong guess degrades to today's
+ *  behaviour (one item), never to mangled prose. */
+const LIST_LABEL_MAX = 40;
+const LIST_LABEL_MAX_WORDS = 4;
+function listTextToLines(text: string): string {
+  if (!text || /\r?\n/.test(text)) return text;
+  const bulleted = text.split(/\s*[;•·|]\s*/).map(s => s.trim()).filter(Boolean);
+  if (bulleted.length >= 2) return bulleted.join('\n');
+  const parts = text.split(/\s*,\s*/).map(s => s.trim()).filter(Boolean);
+  const looksLikeLabels = parts.length >= 3 && parts.every(p =>
+    p.length <= LIST_LABEL_MAX
+    && p.split(/\s+/).length <= LIST_LABEL_MAX_WORDS
+    && !/[.!?:]$/.test(p));
+  return looksLikeLabels ? parts.join('\n') : text;
+}
+
+function normalizeListTextareas<T extends { fields: Record<string, unknown> }>(
+  records: T[], entityKey: string
+): T[] {
+  const types = FIELD_TYPES[entityKey];
+  if (!types) return records;
+  const areas = Object.keys(types).filter(k => types[k] === 'string/textarea');
+  if (areas.length === 0) return records;
+  return records.map(r => {
+    let touched = false;
+    const fields = { ...r.fields };
+    for (const key of areas) {
+      const val = fields[key];
+      if (typeof val !== 'string') continue;
+      const next = listTextToLines(val);
+      if (next !== val) { fields[key] = next; touched = true; }
+    }
+    return touched ? ({ ...r, fields } as T) : r;
+  });
+}
+
+/** The one post-processing step every READ goes through: lookup objects
+ *  attached, list-ish textareas line-broken. Read helpers call this, not
+ *  the individual passes. */
+function hydrateRecords<T extends { fields: Record<string, unknown> }>(
+  records: T[], entityKey: string
+): T[] {
+  return normalizeListTextareas(enrichLookupFields(records, entityKey), entityKey);
+}
+
+/** Normalize fields for API writes: strip lookup objects to keys, fix date formats. */
+export function cleanFieldsForApi(
+  fields: Record<string, unknown>,
+  entityKey: string
+): Record<string, unknown> {
+  const clean: Record<string, unknown> = { ...fields };
+  // Strip virtual / unknown keys before they hit the API. Sub-agent invents
+  // computed-only keys (e.g. `_netto`, `_bestellung_gesamtbetrag`) for the
+  // 'Berechnungen' display, and a leaky submit-backfill would otherwise send
+  // them to the Living-Apps backend which rejects with 'field does not exist'.
+  const known = FIELD_TYPES[entityKey];
+  if (known) {
+    for (const k of Object.keys(clean)) {
+      if (!(k in known)) delete clean[k];
+    }
+  }
+  for (const [k, v] of Object.entries(clean)) {
+    if (v && typeof v === 'object' && !Array.isArray(v) && 'key' in v) clean[k] = (v as any).key;
+    if (Array.isArray(v)) clean[k] = v.map((item: any) => item && typeof item === 'object' && 'key' in item ? item.key : item);
+  }
+  const types = FIELD_TYPES[entityKey];
+  if (types) {
+    for (const [k, ft] of Object.entries(types)) {
+      if (!(k in clean)) continue;
+      const val = clean[k];
+      // applookup fields: undefined → null (clear single reference)
+      if ((ft === 'applookup/select' || ft === 'applookup/choice') && val === undefined) { clean[k] = null; continue; }
+      // multipleapplookup fields: undefined/null → [] (clear multi reference)
+      if ((ft === 'multipleapplookup/select' || ft === 'multipleapplookup/choice') && (val === undefined || val === null)) { clean[k] = []; continue; }
+      // lookup fields: undefined → null (clear single lookup)
+      if ((ft.startsWith('lookup/')) && val === undefined) { clean[k] = null; continue; }
+      // multiplelookup fields: undefined/null → [] (clear multi lookup)
+      if ((ft.startsWith('multiplelookup/')) && (val === undefined || val === null)) { clean[k] = []; continue; }
+      if (typeof val !== 'string' || !val) continue;
+      if (ft === 'date/datetimeminute') clean[k] = val.slice(0, 16);
+      else if (ft === 'date/date') clean[k] = val.slice(0, 10);
+    }
+  }
+  return clean;
+}
+
+let _cachedUserProfile: Record<string, unknown> | null = null;
+
+export async function getUserProfile(): Promise<Record<string, unknown>> {
+  if (_cachedUserProfile) return _cachedUserProfile;
+  const raw = await callApi('GET', '/user');
+  const skip = new Set(['id', 'image', 'lang', 'gender', 'title', 'fax', 'menus', 'initials']);
+  const data: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(raw)) {
+    if (v != null && !skip.has(k)) data[k] = v;
+  }
+  _cachedUserProfile = data;
+  return data;
+}
+
+export interface HeaderProfile {
+  firstname: string;
+  surname: string;
+  email: string;
+  image: string | null;
+  company: string | null;
+}
+
+let _cachedHeaderProfile: HeaderProfile | null = null;
+
+export async function getHeaderProfile(): Promise<HeaderProfile> {
+  if (_cachedHeaderProfile) return _cachedHeaderProfile;
+  const raw = await callApi('GET', '/user');
+  _cachedHeaderProfile = {
+    firstname: raw.firstname ?? '',
+    surname: raw.surname ?? '',
+    email: raw.email ?? '',
+    image: raw.image ?? null,
+    company: raw.company ?? null,
+  };
+  return _cachedHeaderProfile;
+}
+
+export interface AppGroupInfo {
+  id: string;
+  name: string;
+  image: string | null;
+  createdat: string;
+  /** Resolved link: /objects/{id}/ if the dashboard exists, otherwise /gateway/apps/{firstAppId}?template=list_page */
+  href: string;
+}
+
+let _cachedAppGroups: AppGroupInfo[] | null = null;
+
+export async function getAppGroups(): Promise<AppGroupInfo[]> {
+  if (_cachedAppGroups) return _cachedAppGroups;
+  const raw = await callApi('GET', '/appgroups?with=apps');
+  const groups: AppGroupInfo[] = Object.values(raw)
+    .map((g: any) => {
+      const firstAppId = Object.keys(g.apps ?? {})[0] ?? g.id;
+      return {
+        id: g.id,
+        name: g.name,
+        image: g.image ?? null,
+        // API field is created_at (snake_case) — the old camelCase read
+        // left every group '', silently disabling the newest-first sort.
+        createdat: g.created_at ?? g.createdat ?? '',
+        href: `/gateway/apps/${firstAppId}?template=list_page`,
+        _firstAppId: firstAppId,
+      };
+    })
+    .sort((a, b) => b.createdat.localeCompare(a.createdat));
+
+  // Check which appgroups have a deployed dashboard via app params
+  const paramChecks = await Promise.allSettled(
+    groups.map(g => callApi('GET', `/apps/${(g as any)._firstAppId}/params/la_page_header_additional_url`, undefined, { silent: true }))
+  );
+  paramChecks.forEach((result, i) => {
+    if (result.status !== 'fulfilled' || !result.value) return;
+    const url = result.value.value;
+    if (typeof url === 'string' && url.length > 0) {
+      try { groups[i].href = new URL(url).pathname; } catch { groups[i].href = url; }
+    }
+  });
+
+  // Clean up internal helper property
+  groups.forEach(g => delete (g as any)._firstAppId);
+
+  _cachedAppGroups = groups;
+  return _cachedAppGroups;
+}
+
+export class LivingAppsService {
+  // --- VERANSTALTUNGEN ---
+  static async getVeranstaltungen(): Promise<Veranstaltungen[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.VERANSTALTUNGEN}/records`);
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as Veranstaltungen[];
+    return hydrateRecords(records, 'veranstaltungen');
+  }
+  static async queryVeranstaltungen(q: RecordQuery = {}): Promise<Veranstaltungen[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.VERANSTALTUNGEN}/records${recordQueryString(q)}`, undefined, { signal: q.signal, silent: q.silent });
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as Veranstaltungen[];
+    return hydrateRecords(records, 'veranstaltungen');
+  }
+  static async countVeranstaltungen(filter?: string, signal?: AbortSignal): Promise<number> {
+    const data = await callApi('GET', `/apps/${APP_IDS.VERANSTALTUNGEN}/aggregate_records${recordQueryString({ filter })}${filter ? '&' : '?'}value=count()`, undefined, { signal, silent: true });
+    return parseAggregateCount(data);
+  }
+  static async getVeranstaltungenEntry(id: string): Promise<Veranstaltungen | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.VERANSTALTUNGEN}/records/${id}`);
+    const record = { record_id: data.id, ...data, createdat: data.created_at ?? '', updatedat: data.updated_at ?? null } as Veranstaltungen;
+    return hydrateRecords([record], 'veranstaltungen')[0];
+  }
+  static async createVeranstaltungenEntry(fields: CreateVeranstaltungen): Promise<MutationResult> {
+    const data = await callApi('POST', `/apps/${APP_IDS.VERANSTALTUNGEN}/records`, { fields: cleanFieldsForApi(fields as any, 'veranstaltungen') });
+    return { ...data, record_id: data.id };
+  }
+  static async updateVeranstaltungenEntry(id: string, fields: Partial<CreateVeranstaltungen>): Promise<MutationResult> {
+    const data = await callApi('PATCH', `/apps/${APP_IDS.VERANSTALTUNGEN}/records/${id}`, { fields: cleanFieldsForApi(fields as any, 'veranstaltungen') });
+    return { ...data, record_id: data.id };
+  }
+  static async deleteVeranstaltungenEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.VERANSTALTUNGEN}/records/${id}`);
+  }
+
+  // --- TEILNEHMENDE ---
+  static async getTeilnehmende(): Promise<Teilnehmende[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.TEILNEHMENDE}/records`);
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as Teilnehmende[];
+    return hydrateRecords(records, 'teilnehmende');
+  }
+  static async queryTeilnehmende(q: RecordQuery = {}): Promise<Teilnehmende[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.TEILNEHMENDE}/records${recordQueryString(q)}`, undefined, { signal: q.signal, silent: q.silent });
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as Teilnehmende[];
+    return hydrateRecords(records, 'teilnehmende');
+  }
+  static async countTeilnehmende(filter?: string, signal?: AbortSignal): Promise<number> {
+    const data = await callApi('GET', `/apps/${APP_IDS.TEILNEHMENDE}/aggregate_records${recordQueryString({ filter })}${filter ? '&' : '?'}value=count()`, undefined, { signal, silent: true });
+    return parseAggregateCount(data);
+  }
+  static async getTeilnehmendeEntry(id: string): Promise<Teilnehmende | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.TEILNEHMENDE}/records/${id}`);
+    const record = { record_id: data.id, ...data, createdat: data.created_at ?? '', updatedat: data.updated_at ?? null } as Teilnehmende;
+    return hydrateRecords([record], 'teilnehmende')[0];
+  }
+  static async createTeilnehmendeEntry(fields: CreateTeilnehmende): Promise<MutationResult> {
+    const data = await callApi('POST', `/apps/${APP_IDS.TEILNEHMENDE}/records`, { fields: cleanFieldsForApi(fields as any, 'teilnehmende') });
+    return { ...data, record_id: data.id };
+  }
+  static async updateTeilnehmendeEntry(id: string, fields: Partial<CreateTeilnehmende>): Promise<MutationResult> {
+    const data = await callApi('PATCH', `/apps/${APP_IDS.TEILNEHMENDE}/records/${id}`, { fields: cleanFieldsForApi(fields as any, 'teilnehmende') });
+    return { ...data, record_id: data.id };
+  }
+  static async deleteTeilnehmendeEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.TEILNEHMENDE}/records/${id}`);
+  }
+
+  // --- FRAGEN_AN_DIE_GRUPPE ---
+  static async getFragenAnDieGruppe(): Promise<FragenAnDieGruppe[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.FRAGEN_AN_DIE_GRUPPE}/records`);
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as FragenAnDieGruppe[];
+    return hydrateRecords(records, 'fragen_an_die_gruppe');
+  }
+  static async queryFragenAnDieGruppe(q: RecordQuery = {}): Promise<FragenAnDieGruppe[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.FRAGEN_AN_DIE_GRUPPE}/records${recordQueryString(q)}`, undefined, { signal: q.signal, silent: q.silent });
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as FragenAnDieGruppe[];
+    return hydrateRecords(records, 'fragen_an_die_gruppe');
+  }
+  static async countFragenAnDieGruppe(filter?: string, signal?: AbortSignal): Promise<number> {
+    const data = await callApi('GET', `/apps/${APP_IDS.FRAGEN_AN_DIE_GRUPPE}/aggregate_records${recordQueryString({ filter })}${filter ? '&' : '?'}value=count()`, undefined, { signal, silent: true });
+    return parseAggregateCount(data);
+  }
+  static async getFragenAnDieGruppeEntry(id: string): Promise<FragenAnDieGruppe | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.FRAGEN_AN_DIE_GRUPPE}/records/${id}`);
+    const record = { record_id: data.id, ...data, createdat: data.created_at ?? '', updatedat: data.updated_at ?? null } as FragenAnDieGruppe;
+    return hydrateRecords([record], 'fragen_an_die_gruppe')[0];
+  }
+  static async createFragenAnDieGruppeEntry(fields: CreateFragenAnDieGruppe): Promise<MutationResult> {
+    const data = await callApi('POST', `/apps/${APP_IDS.FRAGEN_AN_DIE_GRUPPE}/records`, { fields: cleanFieldsForApi(fields as any, 'fragen_an_die_gruppe') });
+    return { ...data, record_id: data.id };
+  }
+  static async updateFragenAnDieGruppeEntry(id: string, fields: Partial<CreateFragenAnDieGruppe>): Promise<MutationResult> {
+    const data = await callApi('PATCH', `/apps/${APP_IDS.FRAGEN_AN_DIE_GRUPPE}/records/${id}`, { fields: cleanFieldsForApi(fields as any, 'fragen_an_die_gruppe') });
+    return { ...data, record_id: data.id };
+  }
+  static async deleteFragenAnDieGruppeEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.FRAGEN_AN_DIE_GRUPPE}/records/${id}`);
+  }
+
+  // --- BEITRAEGE ---
+  static async getBeitraege(): Promise<Beitraege[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.BEITRAEGE}/records`);
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as Beitraege[];
+    return hydrateRecords(records, 'beitraege');
+  }
+  static async queryBeitraege(q: RecordQuery = {}): Promise<Beitraege[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.BEITRAEGE}/records${recordQueryString(q)}`, undefined, { signal: q.signal, silent: q.silent });
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as Beitraege[];
+    return hydrateRecords(records, 'beitraege');
+  }
+  static async countBeitraege(filter?: string, signal?: AbortSignal): Promise<number> {
+    const data = await callApi('GET', `/apps/${APP_IDS.BEITRAEGE}/aggregate_records${recordQueryString({ filter })}${filter ? '&' : '?'}value=count()`, undefined, { signal, silent: true });
+    return parseAggregateCount(data);
+  }
+  static async getBeitraegeEntry(id: string): Promise<Beitraege | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.BEITRAEGE}/records/${id}`);
+    const record = { record_id: data.id, ...data, createdat: data.created_at ?? '', updatedat: data.updated_at ?? null } as Beitraege;
+    return hydrateRecords([record], 'beitraege')[0];
+  }
+  static async createBeitraegeEntry(fields: CreateBeitraege): Promise<MutationResult> {
+    const data = await callApi('POST', `/apps/${APP_IDS.BEITRAEGE}/records`, { fields: cleanFieldsForApi(fields as any, 'beitraege') });
+    return { ...data, record_id: data.id };
+  }
+  static async updateBeitraegeEntry(id: string, fields: Partial<CreateBeitraege>): Promise<MutationResult> {
+    const data = await callApi('PATCH', `/apps/${APP_IDS.BEITRAEGE}/records/${id}`, { fields: cleanFieldsForApi(fields as any, 'beitraege') });
+    return { ...data, record_id: data.id };
+  }
+  static async deleteBeitraegeEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.BEITRAEGE}/records/${id}`);
+  }
+
+  // --- AUSWERTUNGEN ---
+  static async getAuswertungen(): Promise<Auswertungen[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.AUSWERTUNGEN}/records`);
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as Auswertungen[];
+    return hydrateRecords(records, 'auswertungen');
+  }
+  static async queryAuswertungen(q: RecordQuery = {}): Promise<Auswertungen[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.AUSWERTUNGEN}/records${recordQueryString(q)}`, undefined, { signal: q.signal, silent: q.silent });
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as Auswertungen[];
+    return hydrateRecords(records, 'auswertungen');
+  }
+  static async countAuswertungen(filter?: string, signal?: AbortSignal): Promise<number> {
+    const data = await callApi('GET', `/apps/${APP_IDS.AUSWERTUNGEN}/aggregate_records${recordQueryString({ filter })}${filter ? '&' : '?'}value=count()`, undefined, { signal, silent: true });
+    return parseAggregateCount(data);
+  }
+  static async getAuswertungenEntry(id: string): Promise<Auswertungen | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.AUSWERTUNGEN}/records/${id}`);
+    const record = { record_id: data.id, ...data, createdat: data.created_at ?? '', updatedat: data.updated_at ?? null } as Auswertungen;
+    return hydrateRecords([record], 'auswertungen')[0];
+  }
+  static async createAuswertungenEntry(fields: CreateAuswertungen): Promise<MutationResult> {
+    const data = await callApi('POST', `/apps/${APP_IDS.AUSWERTUNGEN}/records`, { fields: cleanFieldsForApi(fields as any, 'auswertungen') });
+    return { ...data, record_id: data.id };
+  }
+  static async updateAuswertungenEntry(id: string, fields: Partial<CreateAuswertungen>): Promise<MutationResult> {
+    const data = await callApi('PATCH', `/apps/${APP_IDS.AUSWERTUNGEN}/records/${id}`, { fields: cleanFieldsForApi(fields as any, 'auswertungen') });
+    return { ...data, record_id: data.id };
+  }
+  static async deleteAuswertungenEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.AUSWERTUNGEN}/records/${id}`);
+  }
+
+  // --- BEAMER_STEUERUNG ---
+  static async getBeamerSteuerung(): Promise<BeamerSteuerung[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.BEAMER_STEUERUNG}/records`);
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as BeamerSteuerung[];
+    return hydrateRecords(records, 'beamer_steuerung');
+  }
+  static async queryBeamerSteuerung(q: RecordQuery = {}): Promise<BeamerSteuerung[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.BEAMER_STEUERUNG}/records${recordQueryString(q)}`, undefined, { signal: q.signal, silent: q.silent });
+    const records = Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec,
+      createdat: rec.created_at ?? '', updatedat: rec.updated_at ?? null,
+    })) as BeamerSteuerung[];
+    return hydrateRecords(records, 'beamer_steuerung');
+  }
+  static async countBeamerSteuerung(filter?: string, signal?: AbortSignal): Promise<number> {
+    const data = await callApi('GET', `/apps/${APP_IDS.BEAMER_STEUERUNG}/aggregate_records${recordQueryString({ filter })}${filter ? '&' : '?'}value=count()`, undefined, { signal, silent: true });
+    return parseAggregateCount(data);
+  }
+  static async getBeamerSteuerungEntry(id: string): Promise<BeamerSteuerung | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.BEAMER_STEUERUNG}/records/${id}`);
+    const record = { record_id: data.id, ...data, createdat: data.created_at ?? '', updatedat: data.updated_at ?? null } as BeamerSteuerung;
+    return hydrateRecords([record], 'beamer_steuerung')[0];
+  }
+  static async createBeamerSteuerungEntry(fields: CreateBeamerSteuerung): Promise<MutationResult> {
+    const data = await callApi('POST', `/apps/${APP_IDS.BEAMER_STEUERUNG}/records`, { fields: cleanFieldsForApi(fields as any, 'beamer_steuerung') });
+    return { ...data, record_id: data.id };
+  }
+  static async updateBeamerSteuerungEntry(id: string, fields: Partial<CreateBeamerSteuerung>): Promise<MutationResult> {
+    const data = await callApi('PATCH', `/apps/${APP_IDS.BEAMER_STEUERUNG}/records/${id}`, { fields: cleanFieldsForApi(fields as any, 'beamer_steuerung') });
+    return { ...data, record_id: data.id };
+  }
+  static async deleteBeamerSteuerungEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.BEAMER_STEUERUNG}/records/${id}`);
+  }
+
+}
+```
+
+## src/App.tsx
+```
+import '@/lib/sentry';
+import '@/lib/stale-bundle';
+import { Fragment, lazy, Suspense, useEffect, useState } from 'react';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { locale, onLocaleChange, syncProfileLocale, t } from '@/i18n';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { ErrorBusProvider } from '@/components/ErrorBus';
+import { IntentPolicyLoader } from '@/components/IntentPolicyLoader';
+// Lazy: the dashboard's chrome and pages load only when a dashboard route is
+// opened. A visitor on #/public/:slug paid for all of it (header, drawer,
+// overview, admin pages — 1068 KB main chunk, 3,8 s on a slow phone; P-2,
+// 03.11.2026) although the public page needs none of it.
+const Layout = lazy(() => import('@/components/Layout').then(m => ({ default: m.Layout })));
+const DashboardReady = lazy(() => import('@/pages/DashboardReady'));
+const PublicPagesAdmin = lazy(() => import('@/pages/PublicPagesAdmin'));
+const PublicPageFields = lazy(() => import('@/pages/PublicPageFields'));
+const IntentFields = lazy(() => import('@/pages/IntentFields'));
+const IntentsAdmin = lazy(() => import('@/pages/IntentsAdmin'));
+const AppMap = lazy(() => import('@/pages/AppMap'));
+// <custom:imports>
+// </custom:imports>
+
+// Lazy: public pages live outside <Layout> and only load on /#/public/:slug —
+// dashboard users never pay for them, anonymous visitors skip the dashboard.
+const PublicPage = lazy(() => import('@/pages/public/PublicPage'));
+
+function RouteNotFound() {
+  const { pathname } = useLocation();
+  return (
+    <div className="max-w-xl mx-auto mt-16 rounded-[27px] bg-card shadow-lg p-8 space-y-3" role="alert">
+      <h1 className="text-xl font-semibold tracking-tight">{t('nf_title')}</h1>
+      <p className="text-sm text-muted-foreground break-all">{t('nf_message', { path: pathname })}</p>
+      <a href="#/" className="inline-flex text-sm font-medium text-primary hover:underline">{t('nf_back')}</a>
+    </div>
+  );
+}
+
+// Language switch = full remount below the router: every t()/label lookup
+// re-evaluates, the la-* widgets re-read <html lang>. Sits inside HashRouter
+// so the current route survives (it re-reads the URL hash).
+function LocaleGate({ children }: { children: React.ReactNode }) {
+  // The i18n layer notifies for locale CHANGES and for catalog/overlay
+  // ARRIVALS (same locale, new data). `setCurrent(locale)` bailed out on
+  // the arrivals — when locales/pages.json lost the race against the first
+  // paint, the page stayed frozen in the build language until the next
+  // locale switch. A generation counter accepts every notification; the
+  // key must include it because `children` is the same element object on
+  // every gate render (React would bail out without the remount).
+  const [gen, setGen] = useState(0);
+  useEffect(() => onLocaleChange(() => setGen((g) => g + 1)), []);
+  // Adopt the LA profile language (SSOT) — but never on public routes,
+  // where the visitor's browser language governs (initPublicLocale).
+  useEffect(() => {
+    if (!window.location.hash.startsWith('#/public')) void syncProfileLocale();
+  }, []);
+  return <Fragment key={`${locale}:${gen}`}>{children}</Fragment>;
+}
+
+const APPGROUP_ID = '6aeb80dd4bc68acf2f788b6e';
+
+// The assistant (chat + Werkzeuge + code viewer) is platform chrome:
+// <la-klar-assistant>, loaded via /actions-agent/embed/embed.js (appended
+// dynamically in index.html). Own shadow DOM, own styling. Mounted OUTSIDE
+// LocaleGate on purpose — its keyed remounts (locale switch, catalog
+// arrival) must not tear the element down mid-chat; the element follows
+// <html lang> itself. Hidden on anonymous public routes; its 401 guard is
+// the backstop, not the mechanism.
+function AssistantMount() {
+  const location = useLocation();
+  if (location.pathname.startsWith('/public')) return null;
+  return <la-klar-assistant appgroup-id={APPGROUP_ID} />;
+}
+
+export default function App() {
+  return (
+    <ErrorBoundary>
+      <ErrorBusProvider>
+        <HashRouter>
+            <AssistantMount />
+            <IntentPolicyLoader />
+            <LocaleGate>
+            <Routes>
+              <Route path="public/:slug" element={<Suspense fallback={null}><PublicPage /></Suspense>} />
+              {/* Routes WITHOUT the dashboard chrome (a beamer view, a kiosk page, a print
+                  sheet): header, drawer and assistant stay away, the route still runs inside
+                  the app (locale, error boundary, Sentry). Wired by
+                  `node scripts/wire-intent.mjs --bare`, kept across updates (S-2). */}
+              {/* <custom:bare-routes> */}
+              {/* </custom:bare-routes> */}
+              <Route element={<Suspense fallback={null}><Layout /></Suspense>}>
+                <Route index element={<DashboardReady />} />
+                <Route path="verwaltung/ablaeufe" element={<IntentsAdmin />} />
+                <Route path="verwaltung/anwendung" element={<AppMap />} />
+                <Route path="verwaltung/ablaeufe/:slug/felder" element={<IntentFields />} />
+                <Route path="verwaltung/oeffentliche-seiten" element={<PublicPagesAdmin />} />
+                <Route path="verwaltung/oeffentliche-seiten/:slug/felder" element={<PublicPageFields />} />
+                {/* <custom:routes> */}
+                {/* </custom:routes> */}
+                {/* An unknown hash (a bookmark from before a rebuild renamed the
+                    flows, a mistyped link) must not be a blank page. */}
+                <Route path="*" element={<RouteNotFound />} />
+              </Route>
+            </Routes>
+            </LocaleGate>
+        </HashRouter>
+      </ErrorBusProvider>
+    </ErrorBoundary>
+  );
+}
+
+```
